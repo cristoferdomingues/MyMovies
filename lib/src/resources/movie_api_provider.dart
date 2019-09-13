@@ -1,19 +1,20 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' show Client, Response;
 import '../models/item_model.dart';
 import '../models/trailer_model.dart';
 
 class MovieApiProvider {
   Client client = Client();
-  final _apiKey = '9dd7493bcc36e54b5dd16c9ad9531e81';
-  final _baseUrl = "http://api.themoviedb.org/3/movie";
+  final _apiKey = DotEnv().env['API_KEY'];
+  final _baseUrl = DotEnv().env['API_URL_BASE'];
 
   Future<ItemModel> fetchMovieList() async {
     Response response;
-    if(_apiKey != 'api-key') {
-       response = await client.get("$_baseUrl/popular?api_key=$_apiKey");
-    }else{
+    if (_apiKey != 'api-key') {
+      response = await client.get("$_baseUrl/popular?api_key=$_apiKey");
+    } else {
       throw Exception('Please add your API key');
     }
     if (response.statusCode == 200) {
