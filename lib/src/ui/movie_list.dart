@@ -6,9 +6,7 @@ import '../blocs/movie_detail_bloc_provider.dart';
 
 class MovieList extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() {
-    return MovieListState();
-  }
+  State<StatefulWidget> createState() => MovieListState();
 }
 
 class MovieListState extends State<MovieList> {
@@ -48,14 +46,13 @@ class MovieListState extends State<MovieList> {
     return GridView.builder(
         itemCount: snapshot.data.results.length,
         gridDelegate:
-        new SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+            new SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
         itemBuilder: (BuildContext context, int index) {
           return GridTile(
             child: InkResponse(
               enableFeedback: true,
               child: Image.network(
-                'https://image.tmdb.org/t/p/w185${snapshot.data
-                    .results[index].poster_path}',
+                'https://image.tmdb.org/t/p/w185${snapshot.data.results[index].poster_path}',
                 fit: BoxFit.cover,
               ),
               onTap: () => openDetailPage(snapshot.data, index),
@@ -77,9 +74,7 @@ class MovieListState extends State<MovieList> {
     );
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) {
-        return page;
-      }),
+      MaterialPageRoute(builder: (context) => page),
     );
   }
 }
